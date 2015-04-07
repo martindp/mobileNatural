@@ -1,0 +1,15 @@
+<div class="bar bar-subheader item-input-inset">
+    
+    <input type="search" placeholder="Search">
+ <a class="button button-icon icon ion-search" align="right"></a>
+</div>
+
+<ion-view title='<img align="left" class="title-image" src="img/Manzana38px.png" />'>
+  <ion-content class="has-subheader">
+    <ion-list>
+      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
+        {{playlist.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
