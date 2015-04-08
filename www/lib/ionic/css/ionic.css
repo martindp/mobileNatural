@@ -2,7 +2,7 @@
  * Copyright 2014 Drifty Co.
  * http://drifty.com/
  *
- * Ionic, v1.0.0-rc.2
+ * Ionic, v1.0.0-rc.1
  * A powerful HTML5 mobile app framework.
  * http://ionicframework.com/
  *
@@ -3034,9 +3034,9 @@ a.subdued {
   left: 0;
   z-index: 9;
   box-sizing: border-box;
-  padding: 5px;
+  padding: 0px;
   width: 100%;
-  height: 44px;
+  height: 42px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
@@ -3113,9 +3113,9 @@ a.subdued {
     .bar.bar-assertive.bar-footer {
       background-image: linear-gradient(180deg, #e42012, #e42012 50%, transparent 50%); }
   .bar.bar-balanced {
-    border-color: #28a54c;
-    background-color: #33cd5f;
-    background-image: linear-gradient(0deg, #28a54c, #28a54c 50%, transparent 50%);
+    border-color: #82992E;
+    background-color: #95B634;
+    background-image: linear-gradient(0deg, #82992E, #82992E 50%, transparent 50%);
     color: #fff; }
     .bar.bar-balanced .title {
       color: #fff; }
@@ -3155,15 +3155,16 @@ a.subdued {
     left: 0;
     z-index: 0;
     overflow: hidden;
-    margin: 0 10px;
+    margin-left: 0px;
+    margin-top: 2px;
     min-width: 30px;
-    height: 43px;
+    height: 40px;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 17px;
     font-weight: 500;
-    line-height: 44px; }
+    line-height: 40px; }
     .bar .title.title-left {
       text-align: left; }
     .bar .title.title-right {
@@ -4542,7 +4543,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
 
 .popup-body {
   padding: 10px;
-  overflow: auto; }
+  overflow: scroll; }
 
 .popup-buttons {
   display: -webkit-box;
