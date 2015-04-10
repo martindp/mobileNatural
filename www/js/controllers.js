@@ -43,4 +43,4 @@ angular.module('starter.controllers', ['ionic','ngResource'])
 
 .controller('CategoriaCtrl', function($scope, $stateParams, Categorias, $resource) {
   $scope.categoria = $resource('http://localhost:51297/api/Categorias/'+ $stateParams.categoriaId).get();
-});
+    });
