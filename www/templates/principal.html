@@ -7,8 +7,8 @@
 <ion-view title='<img align="left" class="title-image" src="img/Manzana38px.png" />'>
   <ion-content class="has-subheader">
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
+      <ion-item ng-repeat="categoria in categorias" href="#/app/categorias/{{categoria.Id}}">
+        {{categoria.Nombre}} ({{categoria.CantidadProductos}})
       </ion-item>
     </ion-list>
   </ion-content>

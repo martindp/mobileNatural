@@ -1,4 +1,8 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic','ngResource'])
+
+.factory('Categorias', function($resource) {
+  return $resource('http://localhost:51297/api/Categorias:id');
+})
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
@@ -33,16 +37,10 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('CategoriasCtrl', function($scope, Categorias) {
+  $scope.categorias = Categorias.query();
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('CategoriaCtrl', function($scope, $stateParams, Categorias, $resource) {
+  $scope.categoria = $resource('http://localhost:51297/api/Categorias/'+ $stateParams.categoriaId).get();
 });
