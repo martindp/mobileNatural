@@ -1,0 +1,34 @@
+<ion-view view-title="Productos">
+  <ion-content>
+    <div class="card">
+      <div class="item item-divider">
+        Productos de {{productor.NombreEmpresa}}
+      </div>
+    </div>
+    <div class="list card" ng-repeat="producto in productor.Productos">
+
+      <div class="item item-avatar">
+        <img src="{{producto.ImagenProducto}}">
+        <h2>{{producto.Nombre}}</h2>
+        <p>
+          {{producto.DescripcionCorta}}
+        </p>
+      </div>
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item">
+          <p><rating ng-model="producto.Calificacion" max="5" readonly="true"></rating></p>
+        </a>
+        <h>
+          ${{producto.Precio}}
+        </h>
+        <p style="font-size: 10px">
+          &nbsp;(x {{producto.Cantidad}}{{producto.Unidad}})
+        </p>
+        <a class="tab-item button button-balanced" style="margin-left: 10px" href="#">
+          <i class="icon ion-android-cart"></i>
+        </a>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

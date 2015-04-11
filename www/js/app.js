@@ -29,15 +29,35 @@ var appModule = angular.module('starter', ['ionic', 'starter.controllers', 'ngRe
     templateUrl: "templates/menu.html",
     controller: 'AppCtrl'
   })
-
-  .state('app.search', {
-    url: "/search",
+  .state('app.productores', {
+    url: "/productores",
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
+        templateUrl: "templates/productores.html",
+        controller: 'ProductoresCtrl'
       }
     }
   })
+
+      .state('app.productor', {
+        url: "/productores/:productorId",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/productor.html",
+            controller: 'ProductorCtrl'
+          }
+        }
+      })
+
+      .state('app.productosProductor', {
+        url: "/productosProductor/:productorId",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/productosProductor.html",
+            controller: 'ProductorCtrl'
+          }
+        }
+      })
 
   .state('app.browse', {
     url: "/browse",
@@ -47,6 +67,9 @@ var appModule = angular.module('starter', ['ionic', 'starter.controllers', 'ngRe
       }
     }
   })
+
+
+
     .state('app.categorias', {
       url: "/categorias",
       views: {
@@ -66,6 +89,8 @@ var appModule = angular.module('starter', ['ionic', 'starter.controllers', 'ngRe
       }
     }
   });
+
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/categorias');
 });
