@@ -1,40 +1,31 @@
-<ion-view view-title="Categoria">
+<ion-view view-title="Productos">
   <ion-content>
-    <h1>{{categoria.Nombre}}</h1>
-    <p>{{categoria.Descripcion}}</p>
+    <div class="card">
+      <div class="item item-divider">
+        {{categoria.Nombre}}
+      </div>
+    </div>
     <div class="list card" ng-repeat="producto in categoria.Productos">
 
       <div class="item item-avatar">
         <img src="{{producto.ImagenProducto}}">
         <h2>{{producto.Nombre}}</h2>
-      </div>
-
-      <div class="item item-body">
-        <img class="full-image" src="{{producto.ImagenProducto}}">
         <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          the content is from a card-body consisting of an image and paragraph text. The footer
-          consists of tabs, icons aligned left, within the card-footer.
-        </p>
-        <p><rating ng-model="producto.Calificacion" max="5" readonly="true"></rating></p>
-        <p>
-          <a href="#" class="subdued">1 Like</a>
-          <a href="#" class="subdued">5 Comments</a>
+          {{producto.DescripcionCorta}}
         </p>
       </div>
-
       <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" href="#">
-          <i class="icon ion-thumbsup"></i>
-          Like
+        <a class="tab-item">
+          <p><rating ng-model="producto.Calificacion" max="5" readonly="true"></rating></p>
         </a>
-        <a class="tab-item" href="#">
-          <i class="icon ion-chatbox"></i>
-          Comment
-        </a>
-        <a class="tab-item" href="#">
-          <i class="icon ion-share"></i>
-          Share
+        <h>
+          ${{producto.Precio}}
+        </h>
+        <p style="font-size: 10px">
+          &nbsp;(x {{producto.Cantidad}}{{producto.Unidad}})
+        </p>
+        <a class="tab-item button button-balanced" style="margin-left: 10px" href="#">
+          <i class="icon ion-android-cart"></i>
         </a>
       </div>
 

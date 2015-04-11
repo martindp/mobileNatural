@@ -1,7 +1,14 @@
 angular.module('starter.controllers', ['ionic','ngResource'])
 
 .factory('Categorias', function($resource) {
-  return $resource('http://localhost:51297/api/Categorias:id');
+  return {
+    obtenerCategorias: function () {
+      return $resource('http://localhost:51297/api/Categorias').query();
+    },
+    obtenerCategoriaPorId: function (id) {
+      return $resource('http://localhost:51297/api/Categorias/'+id).get();
+    }
+  }
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -38,9 +45,9 @@ angular.module('starter.controllers', ['ionic','ngResource'])
 })
 
 .controller('CategoriasCtrl', function($scope, Categorias) {
-  $scope.categorias = Categorias.query();
+  $scope.categorias = Categorias.obtenerCategorias();
 })
 
-.controller('CategoriaCtrl', function($scope, $stateParams, Categorias, $resource) {
-  $scope.categoria = $resource('http://localhost:51297/api/Categorias/'+ $stateParams.categoriaId).get();
-    });
+.controller('CategoriaCtrl', function($scope, Categorias, $stateParams) {
+  $scope.categoria = Categorias.obtenerCategoriaPorId($stateParams.categoriaId);
+});
