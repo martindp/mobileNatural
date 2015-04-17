@@ -57,7 +57,7 @@ var appModule = angular.module('starter', ['ionic', 'starter.controllers', 'ngRe
       }
     })
 
-  .state('app.single', {
+  .state('app.categoria', {
     url: "/categorias/:categoriaId",
     views: {
       'menuContent': {
@@ -65,7 +65,18 @@ var appModule = angular.module('starter', ['ionic', 'starter.controllers', 'ngRe
         controller: 'CategoriaCtrl'
       }
     }
+  })
+
+  .state('app.producto', {
+    url: "/productos/:productoId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/producto.html",
+        controller: 'ProductoCtrl'
+      }
+    }
   });
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/categorias');
 });

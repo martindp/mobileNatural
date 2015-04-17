@@ -1,0 +1,123 @@
+<ion-view view-title="Producto">
+  <ion-content>
+    <div class="card">
+      <div class="item item-divider">
+        {{producto.Nombre}}
+      </div>
+    </div>
+    <div class="container row">
+      <div class="col">
+        <img class="full-image" src="{{producto.ImagenProducto}}">
+      </div>
+      <div class="col">
+        <p><rating ng-model="producto.Calificacion" max="5" readonly="true"></rating></p>
+        Productor: <a href="#">{{producto.NombreProductor}}</a>
+        <br/>
+        Categoria:<a href="#/app/categorias/{{producto.CategoriaId}}">{{producto.NombreCategoria}}</a>
+        <h4>
+          ${{producto.Precio}}
+          <span style="font-size: 10px">
+            &nbsp;(x {{producto.Cantidad}}{{producto.Unidad}})
+          </span>
+        </h4>
+        <a style="float:right" class="button button-balanced" href="#">
+          <i class="icon ion-android-cart"></i>
+        </a>
+      </div>
+    </div>
+    <div style="margin-right:5px; margin-left:5px" ng-show="descripcion">
+      <div style="width:100%" class="tabs-striped tabs-top">
+        <div style="position: inherit" class="tabs">
+          <a class="tab-item active" ng-click="mostrarDescripcion()">
+            Descripcion
+          </a>
+          <a class="tab-item" ng-click="mostrarComentarios()">
+            Comentarios
+          </a>
+          <a class="tab-item" ng-click="mostrarConsultas()">
+            Consultas
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          {{producto.Descripcion}}
+        </div>
+      </div>
+    </div>
+    <div style="margin-right:5px; margin-left:5px" ng-show="comentarios">
+      <div style="width:100%" class="tabs-striped tabs-top">
+        <div style="position: inherit" class="tabs">
+          <a class="tab-item" ng-click="mostrarDescripcion()">
+            Descripcion
+          </a>
+          <a class="tab-item active" ng-click="mostrarComentarios()">
+            Comentarios
+          </a>
+          <a class="tab-item" ng-click="mostrarConsultas()">
+            Consultas
+          </a>
+        </div>
+      </div>
+        <div ng-repeat="comentario in producto.Comentarios" class="card">
+          <div class="item item-divider">
+            <rating ng-model="comentario.Calificacion" max="5" readonly="true"></rating>&nbsp;{{comentario.Usuario}}
+          </div>
+          <div class="item item-text-wrap">
+            {{comentario.Descripcion}}
+          </div>
+        </div>
+    </div>
+    <div style="margin-right:5px; margin-left:5px" ng-show="consultas">
+      <div style="width:100%" class="tabs-striped tabs-top">
+        <div style="position: inherit" class="tabs">
+          <a class="tab-item" ng-click="mostrarDescripcion()">
+            Descripcion
+          </a>
+          <a class="tab-item" ng-click="mostrarComentarios()">
+            Comentarios
+          </a>
+          <a class="tab-item active" ng-click="mostrarConsultas()">
+            Consultas
+          </a>
+        </div>
+      </div>
+      <div ng-show="!nuevaConsulta">
+        <div class="container">
+            <a style="margin-top: 20px" class="button button-block button-calm" ng-click="crearConsulta()">
+              Hacer Consulta
+            </a>
+        </div>
+        <div ng-repeat="consulta in producto.Consultas" class="card">
+          <div class="item item-divider">
+            {{consulta.Nombre}}&nbsp;{{consulta.Apellido}}
+          </div>
+          <div class="item item-text-wrap">
+            {{consulta.Descripcion}}
+          </div>
+          <div ng-show="consulta.Respuesta != null && consulta.Respuesta != ''" class="card">
+            <div class="item item-divider">
+              {{consulta.Productor}}
+            </div>
+            <div class="item item-text-wrap">
+              {{consulta.Respuesta}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container" ng-show="nuevaConsulta">
+        <div style="margin-top: 20px" class="list">
+          <label class="item item-input">
+            <textarea ng-model="consulta.Descripcion" placeholder="Escribe tu consulta aqui"></textarea>
+          </label>
+        </div>
+        <button ng-click="guardarConsulta(producto.Id, consulta.Descripcion)" class="button button-block button-calm">
+          Enviar
+        </button>
+        <button ng-click="cancelarConsulta()" class="button button-block button-light">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
