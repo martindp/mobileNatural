@@ -3,8 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-var appModule = angular.module('starter', ['ionic', 'starter.controllers', 'ngResource', 'ui.bootstrap'])
+// 'starter.controllers' is found in app-controller.js
+var appModule = angular.module('starter', ['ionic', 'ngResource', 'ui.bootstrap'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
