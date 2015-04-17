@@ -1,19 +1,27 @@
-<ion-view view-title="Productos">
-  <ion-content>
+<div class="bar bar-subheader item-input-inset">
+  <label class="item-input-wrapper">
+    <input type="search" ng-model="filters.Nombre" placeholder="Buscar">
+  </label>
+  <button class="button button-icon icon ion-search">
+  </button>
+</div>
+
+<ion-view title='<img align="left" class="title-image" src="img/Manzana38px.png" />'>
+  <ion-content class="has-subheader">
     <div class="card">
       <div class="item item-divider">
         Productos de {{productor.NombreEmpresa}}
       </div>
     </div>
-    <div class="list card" ng-repeat="producto in productor.Productos">
+    <div class="list card" ng-repeat="producto in productor.Productos | filter:filters">
 
-      <div class="item item-avatar">
+      <a href="#/app/productos/{{producto.Id}}" class="item item-avatar">
         <img src="{{producto.ImagenProducto}}">
         <h2>{{producto.Nombre}}</h2>
         <p>
           {{producto.DescripcionCorta}}
         </p>
-      </div>
+      </a>
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a class="tab-item">
           <p><rating ng-model="producto.Calificacion" max="5" readonly="true"></rating></p>
