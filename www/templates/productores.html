@@ -1,0 +1,36 @@
+<div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+        <input type="search" placeholder="Buscar">
+    </label>
+    <button class="button button-icon icon ion-search">
+    </button>
+</div>
+
+<ion-view title='<img align="left" class="title-image" src="img/Manzana38px.png" />'>
+  <ion-content class="has-subheader">
+
+
+
+      <div class="list card" ng-repeat="productor in productores">
+              <a class="item item-avatar" href="#/app/productores/{{productor.Id}}">
+                  <img src="{{productor.ImagenProductor}}">
+                  <h2>{{productor.NombreEmpresa}}</h2>
+                  <p>
+                      {{productor.Direccion}}
+                  </p>
+              </a>
+              <div class="item tabs tabs-secondary">
+                  <a class="tab-item">
+                      <p><rating ng-model="productor.Calificacion" max="5" readonly="true"></rating></p>
+                  </a>
+
+                  <a class="tab-item button-full balanced" style="margin-left: 10px" href="#/app/productosProductor/{{productor.Id}}">
+                      Ver productos
+                  </a>
+              </div>
+
+          </div>
+
+
+  </ion-content>
+</ion-view>

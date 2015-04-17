@@ -25,6 +25,20 @@ angular.module('starter.controllers', ['ionic','ngResource'])
             }
         }
     })
+    .factory('Productores', function($resource) {
+      return {
+          obtenerProductores: function(){
+              return $resource('http://localhost:51297/api/Productores').query();
+          },
+          obtenerProductorPorId: function(id){
+              return $resource('http://localhost:51297/api/Productores/'+id).get();
+          }
+      }
+    })
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+  // Form data for the login modal
+  $scope.loginData = {};
 
     .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
         // Form data for the login modal
@@ -58,6 +72,16 @@ angular.module('starter.controllers', ['ionic','ngResource'])
             }, 1000);
         };
     })
+    .controller('ProductoresCtrl', function($scope, Productores) {
+        $scope.productores = Productores.obtenerProductores();
+    })
+
+    .controller('ProductorCtrl', function($scope, $stateParams, Productores) {
+        $scope.productor = Productores.obtenerProductorPorId($stateParams.productorId)
+    })
+.controller('CategoriasCtrl', function($scope, Categorias) {
+  $scope.categorias = Categorias.obtenerCategorias();
+})
 
     .controller('CategoriasCtrl', function($scope, Categorias) {
         $scope.categorias = Categorias.obtenerCategorias();
