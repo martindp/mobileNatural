@@ -38,6 +38,15 @@ var appModule = angular.module('starter', ['ionic', 'starter.controllers', 'ngRe
       }
     }
   })
+      .state('app.bienvenida', {
+        url: "/bienvenida",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/bienvenida.html"
+            //controller: 'BienvenidaCtrl'
+          }
+        }
+      })
 
       .state('app.productor', {
         url: "/productores/:productorId",
