@@ -36,10 +36,6 @@ angular.module('starter.controllers', ['ionic','ngResource'])
       }
     })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-  // Form data for the login modal
-  $scope.loginData = {};
-
     .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
         // Form data for the login modal
         $scope.loginData = {};
