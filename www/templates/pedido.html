@@ -1,0 +1,28 @@
+<ion-view title='Pedido'>
+  <ion-content>
+      <div class="list card" ng-repeat="pedido in pedidos">
+          <div class="item item-avatar">
+              <img src="{{pedido.imagenProducto}}">
+              <h2>{{pedido.nombre}}</h2>
+              <p>
+                  {{pedido.nombreProductor}}
+              </p>
+          </div>
+          <div class="item tabs tabs-secondary tabs-icon-left">
+              <a class="tab-item">
+
+              </a>
+              <h>
+                  ${{pedido.precio}}
+              </h>
+              <p style="font-size: 10px">
+                  &nbsp;(x {{pedido.cantidad}}{{pedido.unidad}})
+              </p>
+              <a class="tab-item button button-balanced" style="margin-left: 10px">
+                  <i class="icon ion-android-cart"></i>
+              </a>
+          </div>
+
+      </div>
+  </ion-content>
+</ion-view>
