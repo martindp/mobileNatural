@@ -3,26 +3,40 @@
       <div class="list card" ng-repeat="pedido in pedidos">
           <div class="item item-avatar">
               <img src="{{pedido.imagenProducto}}">
-              <h2>{{pedido.nombre}}</h2>
-              <p>
-                  {{pedido.nombreProductor}}
-              </p>
+              <div class="row">
+                  <div class="col col-25">
+                      <h>
+                          ${{pedido.precio}}
+                      </h>
+                      <p style="font-size: 10px">
+                          &nbsp;(x {{pedido.cantidad}}{{pedido.unidad}})
+                      </p>
+                  </div>
+                  <div class="col">
+                      <h2>{{pedido.nombre}}</h2>
+                      <p>
+                          {{pedido.nombreProductor}}
+                      </p>
+                  </div>
+                  <div class="col col-10">
+                      <a ng-click="eliminarPedido($index)" class="button button-icon icon ion-android-cancel"></a>
+                  </div>
+              </div>
           </div>
           <div class="item tabs tabs-secondary tabs-icon-left">
-              <a class="tab-item">
-
-              </a>
+              <a ng-click="eliminarUno(pedido)" class="button button-icon icon ion-android-remove"></a>
               <h>
-                  ${{pedido.precio}}
+                  &nbsp;{{pedido.cantidadPedido}}
               </h>
-              <p style="font-size: 10px">
-                  &nbsp;(x {{pedido.cantidad}}{{pedido.unidad}})
+              <p>
+                  &nbsp;{{pedido.unidad}}&nbsp;
               </p>
-              <a class="tab-item button button-balanced" style="margin-left: 10px">
-                  <i class="icon ion-android-cart"></i>
-              </a>
+              <a ng-click="agregarUno(pedido)" class="button button-icon icon ion-android-add"></a>
+              <div style="margin-left:100px">
+                  <strong>${{pedido.precio * (pedido.cantidadPedido / pedido.cantidad)}}</strong>
+              </div>
           </div>
-
       </div>
+      <a ng-show="pedidos.length > 0" ng-click="realizarPedido()" class="button button-block button-calm">Realizar Pedido</a>
   </ion-content>
 </ion-view>
