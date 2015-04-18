@@ -48,6 +48,16 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
         }
       })
 
+      .state('app.acercaDe', {
+          url: "/acercaDe",
+          views: {
+              'menuContent': {
+                  templateUrl: "templates/acercaDe.html"
+                  //controller: 'BienvenidaCtrl'
+              }
+          }
+      })
+
       .state('app.productor', {
         url: "/productores/:productorId",
         views: {
