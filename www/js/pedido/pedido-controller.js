@@ -7,6 +7,8 @@ appModule
         $scope.eliminarPedido = function(index){
             $scope.pedidos.splice(index, 1);
             $localstorage.setObject('Pedido', $scope.pedidos);
+
+            $("#totalPedidos").html($scope.pedidos.length);
         }
         $scope.agregarUno = function(pedido){
             pedido.cantidadPedido = pedido.cantidadPedido + pedido.cantidad;

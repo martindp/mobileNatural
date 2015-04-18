@@ -90,6 +90,8 @@ appModule
                 }
 
                 $localstorage.setObject('Pedido', pedidos);
+
+                $("#totalPedidos").html(pedidos.length);
             });
         }
     });
