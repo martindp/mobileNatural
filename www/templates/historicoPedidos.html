@@ -1,0 +1,84 @@
+<ion-view title='<img align="left" class="title-image" src="img/Manzana38px.png" />'>
+    <ion-content class="has-subheader">
+        <div class="card">
+            <div class="item item-divider">
+                Mis pedidos realizados
+            </div>
+        </div>
+        <div class="list">
+            <a ng-repeat="pedi in pedidos" class="item item-thumbnail-left">
+                <div class="row">
+                    <table class="cart-table table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Estado del Pedido</th>
+                            <th>Fecha</th>
+                            <th class="product-thumbnail" colspan="2">Producto</th>
+                            <th>Productor</th>
+                            <th class="product-price-th">Precio</th>
+                            <th class="product-quantity">Cantidad</th>
+                            <th class="product-subtotal">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="cart_item">
+                            <td rowspan="@(2 + pedi.PedidosProductos.Count)">
+                                //@EnumHelpers.GetName(typeof(EstadoPedido), (int)item.EstadoPedido)//
+                            </td>
+                        </tr>
+                        <tr class="cart_item">
+                            <td rowspan="@(1 + item.PedidosProductos.Count)">
+                                @item.FechaCreacion.ToShortDateString()
+                            </td>
+                        </tr>
+                        <a ng-repeat = "productoPedid in pedi.PedidosProductos">
+                        {
+                        <tr class="cart_item">
+                            <td class="product-thumbnail">
+                                <a href="product.html">
+                                    <img width="90" src="@productoPedido.Producto.ImagenProducto" class="cart-product-image" alt="">
+                                </a>
+                            </td>
+                            <td>
+                                link
+                            </td>
+                            <td class="product-name">
+                                link
+                            </td>
+                            <td>
+                                <span class="currencies product-price">$</span><span class="amount product-price">{{productoPedid.Producto.Precio}}</span>
+                                    {{productoPedid.Producto.Cantidad}}
+                            </td>
+                            <td class="product-quantity">
+                                <strong>{{productoPedid.Cantidad}}</strong>
+                            </td>
+                            <td class="product-subtotal">
+                                <span class="currencies">$</span><span class="amount">&nbsp;(x {{productoPedid.Cantidad}}{{productoPedid.Unidad}})</span>
+                            </td>
+                            </tr>
+                        </a>
+
+            <tr>
+                <td colspan="8" class="actions">
+                    <div class="form-group">
+                        <a href="#" <i class="arrow-icon-right-thin"></i></a>
+                        @if (pedi.EstadoPedido == EstadoPedido.Entregado)
+                        {
+                        <a style="float: right" href="@Url.Action("Feedback", "Pedido", new {area = "Consumidores", id = item.Id})" class="theme_button"><i style="padding-left: 14px" class="fa fa-comment"></i></a>
+                        }
+                        @if (pedi.EstadoPedido == EstadoPedido.Aceptado)
+                        {
+                        <a style="float: right" href="@Url.Action("MarcarComoEntregado", "Pedido", new {area = "Consumidores", id = item.Id})" class="theme_button">MARCAR PEDIDO COMO ENTREGADO</a>
+                        }
+                    </div>
+
+                </td>
+            </tr>
+
+            </tbody>
+            </table>
+        </div>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

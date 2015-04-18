@@ -126,6 +126,17 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
         }
       })
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/categorias');
-});
+          .state('app.pedidos', {
+            url: "/pedidos",
+            views: {
+              'menuContent': {
+                templateUrl: "templates/historicoPedidos.html",
+                controller: 'PedidosCtrl'
+              }
+            }
+          })
+
+
+      // if none of the above states are matched, use this as the fallback
+      $urlRouterProvider.otherwise('/app/categorias');
+    });
