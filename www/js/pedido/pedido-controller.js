@@ -20,6 +20,12 @@ appModule
             }
             $localstorage.setObject('Pedido', $scope.pedidos);
         }
+        $scope.pedidoEntregado = function (){
+            $resource('http://localhost:51297/api/Pedidos/pedidoEntregado').save($scope.pedidos, function(){
+                $localstorage.setObject('Pedido', null);
+                $location.path("/categorias");
+            });
+        }
         $scope.realizarPedido = function (){
             $resource('http://localhost:51297/api/Pedidos/RealizarPedido').save($scope.pedidos, function(){
                 $localstorage.setObject('Pedido', null);
