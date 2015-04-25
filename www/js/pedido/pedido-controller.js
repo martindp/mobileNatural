@@ -1,6 +1,21 @@
 appModule
-    .controller('PedidosCtrl', function($scope, Pedidos) {
+    .controller('PedidosCtrl', function($scope, Pedidos, $resource, $location) {
         $scope.pedidos = Pedidos.obtenerPedidos();
+
+        $scope.pedidoEntregado = function (index){
+            var pedidoId = $scope.pedidos[index].Id;
+            $resource('http://localhost:51297/api/EditarPedido?pedidoId='+pedidoId).get(function(){
+                $location.path("/categorias");
+            });
+
+        }
+        $scope.repetirPedido = function (index){
+            var pedidoId = $scope.pedidos[index].Id;
+            $resource('http://localhost:51297/api/EditarPedido?pedidoId='+pedidoId).save(function(){
+                $location.path("/categorias");
+            });
+        }
+
     })
     .controller('PedidoCtrl', function($scope, $location, $resource, $localstorage) {
         $scope.pedidos = $localstorage.getObject('Pedido');
@@ -20,11 +35,7 @@ appModule
             }
             $localstorage.setObject('Pedido', $scope.pedidos);
         }
-        $scope.pedidoEntregado = function (){
-            $resource('http://localhost:51297/api/Pedidos/PedidoEntregado').save($scope.pedidos, function(){
-                $location.path("/categorias");
-            });
-        }
+
         $scope.realizarPedido = function (){
             $resource('http://localhost:51297/api/Pedidos/RealizarPedido').save($scope.pedidos, function(){
                 $localstorage.setObject('Pedido', []);

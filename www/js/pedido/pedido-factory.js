@@ -6,9 +6,7 @@ appModule
             },
             obtenerPedidos: function () {
                 return $resource('http://localhost:51297/api/Pedidos').query();
-            },
-            pedidoEntregado: function (pedidos) {
-                return $resource('http://localhost:51297/api/Pedidos/PedidoEntregado').save(pedidos);
             }
+
         }
     })
