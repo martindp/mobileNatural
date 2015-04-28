@@ -11,7 +11,7 @@ appModule
         }
         $scope.repetirPedido = function (index){
             var pedidoId = $scope.pedidos[index].Id;
-            $resource('http://localhost:51297/api/EditarPedido?pedidoId='+pedidoId).save(function(){
+            $resource('http://localhost:51297/api/RepetirPedido?pedidoId='+pedidoId).save(function(){
                 $location.path("/categorias");
             });
         }
