@@ -1,9 +1,9 @@
 <ion-view title='<img align="left" class="title-image" src="img/Manzana38px.png" />'>
     <ion-content class="has-subheader">
         <div class="item item-divider">
-            Mis pedidos realizados
+            Da tu comentario
         </div>
-        <div class="list card" ng-repeat="pedido in pedidos">
+        <div class="list card" ng-repeat="producto in pedidos">
 
             <div class="item item-avatar">
                 <img src="{{pedido.ImagenProductor}}">
@@ -27,7 +27,7 @@
                     <a  class="tab-item button-full ligth" ng-if="pedido.EstadoPedido      == 2">
                         Rechazado
                     </a>
-                    <a  class="tab-item button-full stable" ng-if="pedido.EstadoPedido     == 3" href="#/app/comentarioPedido">
+                    <a  class="tab-item button-full stable" ng-if="pedido.EstadoPedido     == 3" >
                         Comentar A
                     </a>
                 </div>
