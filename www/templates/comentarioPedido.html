@@ -1,42 +1,20 @@
-<ion-view title='<img align="left" class="title-image" src="img/Manzana38px.png" />'>
-    <ion-content class="has-subheader">
-        <div class="item item-divider">
-            Da tu comentario
-        </div>
-        <div class="list card" ng-repeat="producto in pedidos">
-
+<ion-view view-title="Producto">
+    <ion-content>
+        <div class="list card" ng-repeat="pedidoProducto in pedido.PedidosProductos">
             <div class="item item-avatar">
-                <img src="{{pedido.ImagenProductor}}">
-                <h2>{{pedido.NombreProductor}}</h2>
-                <p>
-                    {{pedido.FechaCreacion}}
-                </p>
-                <div class ="list" ng-repeat="producto in pedido.PedidosProductos">
-                    <p>{{producto.Cantidad}} {{producto.NombreProducto}}</p>
+                <img src="{{pedidoProducto.Producto.ImagenProducto}}">
+                <h2>{{pedidoProducto.NombreProducto}}</h2>
+                <div class="container">
+                    <p><rating ng-model="pedidoProducto.Calificacion" max="5" readonly="false"></rating></p>
+                   <label class="item item-input">
+                        <textarea ng-model="pedidoProducto.Comentarios" placeholder="Escribe tu comentario aqui"></textarea>
+                    </label>
+
+                    <button ng-click="comentarPedido(pedidoProducto.PedidoId, pedidoProducto.ProductoId, pedidoProducto.Comentarios,pedidoProducto.Calificacion)" class="button button-block button-calm">
+                        Enviar
+                    </button>
                 </div>
 
-            </div>
-            <div class="item tabs tabs-secondary">
-                <div>
-                    <a  class="tab-item button-full ligth" ng-if="pedido.EstadoPedido      == 0">
-                        Pendiente
-                    </a>
-                    <a  class="tab-item button-full dark" ng-if="pedido.EstadoPedido       == 1" ng-click="pedidoEntregado($index)">
-                        Marcar como entregado
-                    </a>
-                    <a  class="tab-item button-full ligth" ng-if="pedido.EstadoPedido      == 2">
-                        Rechazado
-                    </a>
-                    <a  class="tab-item button-full stable" ng-if="pedido.EstadoPedido     == 3" >
-                        Comentar A
-                    </a>
-                </div>
-
-                <div  style="margin-left: 15px">
-                    <a  class="tab-item button-full balanced" ng-if="pedido.EstadoPedido     == 3" ng-click="repetirPedido($index)">
-                        Ordenar nuevamente
-                    </a>
-                </div>
             </div>
         </div>
     </ion-content>

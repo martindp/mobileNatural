@@ -18,22 +18,22 @@
             </div>
             <div class="item tabs tabs-secondary">
                 <div>
-                    <a  class="tab-item button-full ligth" ng-if="pedido.EstadoPedido      == 0">
+                    <a  class="tab-item button-full ligth" ng-if="pedido.EstadoPedido == 0">
                         Pendiente
                     </a>
-                    <a  class="tab-item button-full dark" ng-if="pedido.EstadoPedido       == 1" ng-click="pedidoEntregado($index)">
+                    <a  class="tab-item button-full dark" ng-if="pedido.EstadoPedido == 1" ng-click="pedidoEntregado($index)">
                         Marcar como entregado
                     </a>
-                    <a  class="tab-item button-full ligth" ng-if="pedido.EstadoPedido      == 2">
+                    <a  class="tab-item button-full ligth" ng-if="pedido.EstadoPedido == 2">
                         Rechazado
                     </a>
-                    <a  class="tab-item button-full stable" ng-if="pedido.EstadoPedido     == 3" href="#/app/comentarioPedido">
-                        Comentar A
+                    <a  class="tab-item button-full stable" ng-if="pedido.EstadoPedido == 3" href="#/app/pedidos/{{pedido.Id}}">
+                        Dejar un comentario
                     </a>
                 </div>
 
                 <div  style="margin-left: 15px">
-                    <a  class="tab-item button-full balanced" ng-if="pedido.EstadoPedido     == 3" ng-click="repetirPedido($index)">
+                    <a  class="tab-item button-full balanced" ng-if="pedido.EstadoPedido == 3 || pedido.EstadoPedido == 2" ng-click="repetirPedido($index)">
                         Ordenar nuevamente
                     </a>
                 </div>

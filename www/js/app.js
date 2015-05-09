@@ -105,7 +105,6 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
       }
     }
   })
-
   .state('app.producto', {
     url: "/productos/:productoId",
     views: {
@@ -115,7 +114,6 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
       }
     }
   })
-
       .state('app.pedido', {
         url: "/pedido",
         views: {
@@ -125,7 +123,6 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
           }
         }
       })
-
           .state('app.pedidos', {
             url: "/pedidos",
             views: {
@@ -135,13 +132,12 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
               }
             }
           })
-
-      .state('app.comentarioPedido', {
-        url: "/comentarioPedido",
+      .state('app.comentarios', {
+        url: "/pedidos/:pedidoId",
         views: {
           'menuContent': {
             templateUrl: "templates/comentarioPedido.html",
-            controller: 'PedidosCtrl'
+            controller: 'ComentariosCtrl'
           }
         }
       })

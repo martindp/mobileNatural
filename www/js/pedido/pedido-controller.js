@@ -15,8 +15,21 @@ appModule
                 $location.path("/categorias");
             });
         }
-
     })
+    .controller('ComentariosCtrl',function($scope, Pedidos,$location, $resource, $stateParams, $localstorage,$http){
+        $scope.pedido = Pedidos.obtenerPedidoPorPedidoId($stateParams.pedidoId);
+
+        $scope.comentarPedido = function (pedidoId, productoId, descripcionComentario, calificacion) {
+            $http({ method: 'POST', isArray: false, url: 'http://localhost:51297/api/Comentarios/PostComentario', params: { PedidoId: pedidoId, ProductoId:productoId, descripcionComentario: descripcionComentario, calificacion: calificacion } }).then(
+                function () {
+                    //$scope.pedidoProducto = { Calificacion: 0 };
+                    //$scope.pedidoProducto = { Comentario: '' };
+                    //Actualizo
+                    $scope.pedido = Pedidos.obtenerPedidoPorPedidoId($stateParams.pedidoId);
+                });
+        };
+
+        })
     .controller('PedidoCtrl', function($scope, $location, $resource, $localstorage) {
         $scope.pedidos = $localstorage.getObject('Pedido');
         $scope.eliminarPedido = function(index){

@@ -6,6 +6,9 @@ appModule
             },
             obtenerPedidos: function () {
                 return $resource('http://localhost:51297/api/Pedidos').query();
+            },
+            obtenerPedidoPorPedidoId: function (id) {
+                return $resource('http://localhost:51297/api/Comentarios/'+id).get();
             }
 
         }
