@@ -27,14 +27,17 @@
                     <a  class="tab-item button-full ligth" ng-if="pedido.EstadoPedido == 2">
                         Rechazado
                     </a>
-                    <a  class="tab-item button-full stable" ng-if="pedido.EstadoPedido == 3" href="#/app/pedidos/{{pedido.Id}}">
-                        Dejar un comentario
+                    <a  class="tab-item button-full dark" ng-if="pedido.EstadoPedido == 3 && pedido.PedidoCalificado==false" href="#/app/pedidos/{{pedido.Id}}">
+                        Comentar
+                    </a>
+                    <a  class="tab-item button-full dark" ng-if="pedido.EstadoPedido == 3 && pedido.PedidoCalificado==true" href="#/app/pedidosD/{{pedido.Id}}">
+                        Ver comentario
                     </a>
                 </div>
 
                 <div  style="margin-left: 15px">
                     <a  class="tab-item button-full balanced" ng-if="pedido.EstadoPedido == 3 || pedido.EstadoPedido == 2" ng-click="repetirPedido($index)">
-                        Ordenar nuevamente
+                        Repetir
                     </a>
                 </div>
             </div>

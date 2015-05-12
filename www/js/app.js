@@ -141,6 +141,15 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
           }
         }
       })
+      .state('app.comentariosDisplay', {
+        url: "/pedidosD/:pedidoId",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/comentarioPedidoDisplay.html",
+            controller: 'ComentariosCtrl'
+          }
+        }
+      })
 
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/app/categorias');

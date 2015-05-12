@@ -8,13 +8,11 @@
                 <img src="{{pedidoProducto.Producto.ImagenProducto}}">
                 <h2>{{pedidoProducto.NombreProducto}}</h2>
                 <div class="container">
-                    <p><rating ng-model="pedidoProducto.Calificacion" max="5" readonly="false"></rating></p>
+                    <p><rating ng-model="pedidoProducto.Calificacion" max="5" readonly="true"></rating></p>
                    <label class="item item-input">
-                        <textarea ng-model="pedidoProducto.Comentarios" placeholder="Escribe tu comentario aqui"></textarea>
+                        {{pedidoProducto.Comentarios}}
                     </label>
-                    <button ng-click="comentarPedido(pedidoProducto.PedidoId, pedidoProducto.ProductoId, pedidoProducto.Comentarios,pedidoProducto.Calificacion)" class="button button-block button-calm">
-                        Calificar
-                    </button>
+
                 </div>
 
             </div>
