@@ -11,7 +11,7 @@
       </div>
       <div class="col">
         <p><rating ng-model="producto.Calificacion" max="5" readonly="true"></rating></p>
-        Productor: <a href="#">{{producto.NombreProductor}}</a>
+        Productor: <a href="#/app/productores/{{producto.ProductorId}}">{{producto.NombreProductor}}</a>
         <br/>
         Categoria:<a href="#/app/categorias/{{producto.CategoriaId}}">{{producto.NombreCategoria}}</a>
         <h4>

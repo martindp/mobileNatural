@@ -38,5 +38,6 @@
           </div>
       </div>
       <a ng-show="pedidos.length > 0" ng-click="realizarPedido()" class="button button-block button-calm">Realizar Pedido</a>
+      <a ng-if="pedido.length == 0"> No hay productos en la cesta.</a>
   </ion-content>
 </ion-view>

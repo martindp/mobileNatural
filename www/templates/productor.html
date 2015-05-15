@@ -1,48 +1,114 @@
 <ion-view view-title="Productor">
   <ion-content>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="{{productor.ImagenProductor}}">
-        <h2>{{productor.NombreEmpresa}}</h2>
+    <div class="card">
+      <div class="item item-divider">
+        {{productor.NombreEmpresa}}
       </div>
-
-      <div class="item item-body">
+    </div>
+    <div class="container row">
+      <div class="col">
         <img class="full-image" src="{{productor.ImagenProductor}}">
-        <p>
-          {{productor.Email}}
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          the content is from a card-body consisting of an image and paragraph text. The footer
-          consists of tabs, icons aligned left, within the card-footer.
-        </p>
+      </div>
+      <div class="col">
         <p><rating ng-model="productor.Calificacion" max="5" readonly="true"></rating></p>
         <a class="button button-block button-balanced" href="#/app/productosProductor/{{productor.Id}}">
           Ver productos
         </a>
-
-        <p>
-          <a href="#" class="subdued">1 Like</a>
-          <a href="#" class="subdued">5 Comments</a>
-        </p>
       </div>
-
-      <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" href="#">
-          <i class="icon ion-thumbsup"></i>
-          Like
-        </a>
-        <a class="tab-item" href="#">
-          <i class="icon ion-chatbox"></i>
-          Comment
-        </a>
-        <a class="tab-item" href="#">
-          <i class="icon ion-share"></i>
-          Share
-        </a>
-      </div>
-
     </div>
-
-
+    <div style="margin-right:5px; margin-left:5px" ng-show="descripcion">
+      <div style="width:100%" class="tabs-striped tabs-top">
+        <div style="position: inherit" class="tabs">
+          <a class="tab-item active" ng-click="mostrarDescripcion()">
+            Descripcion
+          </a>
+          <a class="tab-item" ng-click="mostrarComentarios()">
+            Comentarios
+          </a>
+          <a class="tab-item" ng-click="mostrarConsultas()">
+            Consultas
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          {{productor.Descripcion}}
+        </div>
+      </div>
+    </div>
+    <div style="margin-right:5px; margin-left:5px" ng-show="comentarios">
+      <div style="width:100%" class="tabs-striped tabs-top">
+        <div style="position: inherit" class="tabs">
+          <a class="tab-item" ng-click="mostrarDescripcion()">
+            Descripcion
+          </a>
+          <a class="tab-item active" ng-click="mostrarComentarios()">
+            Comentarios
+          </a>
+          <a class="tab-item" ng-click="mostrarConsultas()">
+            Consultas
+          </a>
+        </div>
+      </div>
+      <div ng-repeat="comentario in productor.Comentarios" class="card">
+        <div class="item item-divider">
+          <rating ng-model="comentario.Calificacion" max="5" readonly="true"></rating>&nbsp;{{comentario.Usuario}}
+        </div>
+        <div class="item item-text-wrap">
+          {{comentario.Descripcion}}
+        </div>
+      </div>
+    </div>
+    <div style="margin-right:5px; margin-left:5px" ng-show="consultas">
+      <div style="width:100%" class="tabs-striped tabs-top">
+        <div style="position: inherit" class="tabs">
+          <a class="tab-item" ng-click="mostrarDescripcion()">
+            Descripcion
+          </a>
+          <a class="tab-item" ng-click="mostrarComentarios()">
+            Comentarios
+          </a>
+          <a class="tab-item active" ng-click="mostrarConsultas()">
+            Consultas
+          </a>
+        </div>
+      </div>
+      <div ng-show="!nuevaConsulta">
+        <div class="container">
+          <a style="margin-top: 20px" class="button button-block button-calm" ng-click="crearConsulta()">
+            Hacer Consulta
+          </a>
+        </div>
+        <div ng-repeat="consulta in productor.Consultas" class="card">
+          <div class="item item-divider">
+            {{consulta.Nombre}}&nbsp;
+          </div>
+          <div class="item item-text-wrap">
+            {{consulta.Descripcion}}
+          </div>
+          <div ng-show="consulta.Respuesta != null && consulta.Respuesta != ''" class="card">
+            <div class="item item-divider">
+              {{consulta.Productor}}
+            </div>
+            <div class="item item-text-wrap">
+              {{consulta.Respuesta}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container" ng-show="nuevaConsulta">
+        <div style="margin-top: 20px" class="list">
+          <label class="item item-input">
+            <textarea ng-model="consulta.Descripcion" placeholder="Escribe tu consulta aqui"></textarea>
+          </label>
+        </div>
+        <button ng-click="guardarConsulta(productor.Id, consulta.Descripcion)" class="button button-block button-calm">
+          Enviar
+        </button>
+        <button ng-click="cancelarConsulta()" class="button button-block button-light">
+          Cancelar
+        </button>
+      </div>
+    </div>
   </ion-content>
-
 </ion-view>
