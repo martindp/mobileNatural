@@ -38,7 +38,7 @@ appModule
             //        $scope.consulta = { Descripcion: '' };
             //    },
             //    function (response) { $scope.errors = response.data; });
-            $http({ method: 'POST', isArray: false, url: 'http://localhost:51297/api/ConsultasProductor/PostConsultas', params: { productorId: productorId, descripcion: descripcion } }).then(
+            $http({ method: 'POST', isArray: false, url: apiUrl+'/api/ConsultasProductor/PostConsultas', params: { productorId: productorId, descripcion: descripcion } }).then(
                 function () {
                     $scope.nuevaConsulta = false;
                     $scope.consulta = { Descripcion: '' };

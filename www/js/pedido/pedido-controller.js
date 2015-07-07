@@ -50,7 +50,7 @@ appModule
         }
 
         $scope.realizarPedido = function (){
-            $resource('http://localhost:51297/api/Pedidos/RealizarPedido').save($scope.pedidos, function(){
+            $resource(apiUrl+'/api/Pedidos/RealizarPedido').save($scope.pedidos, function(){
                 $localstorage.setObject('Pedido', []);
                 $location.path("/categorias");
             });

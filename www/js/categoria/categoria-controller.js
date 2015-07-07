@@ -7,7 +7,7 @@ appModule
         $scope.categoria = Categorias.obtenerCategoriaPorId($stateParams.categoriaId);
 
         $scope.agregarAlCarrito = function(productoId){
-            $resource('http://localhost:51297/api/Productos/'+productoId).get(function(response){
+            $resource(apiUrl+'/api/Productos/'+productoId).get(function(response){
                 var producto = response;
 
                 var pedidos = $localstorage.getObject('Pedido');

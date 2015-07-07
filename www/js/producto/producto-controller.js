@@ -34,7 +34,7 @@ appModule
             //        $scope.consulta = { Descripcion: '' };
             //    },
             //    function (response) { $scope.errors = response.data; });
-            $http({ method: 'POST', isArray: false, url: 'http://localhost:51297/api/Consultas/PostConsultas', params: { productoId: productoId, descripcion: descripcion } }).then(
+            $http({ method: 'POST', isArray: false, url: apiUrl+'/api/Consultas/PostConsultas', params: { productoId: productoId, descripcion: descripcion } }).then(
                 function () {
                     $scope.nuevaConsulta = false;
                     $scope.consulta = { Descripcion: '' };
@@ -48,7 +48,7 @@ appModule
         };
 
         $scope.agregarAlCarrito = function(productoId){
-            $resource('http://localhost:51297/api/Productos/'+productoId).get(function(response){
+            $resource(apiUrl+'/api/Productos/'+productoId).get(function(response){
                 var producto = response;
 
                 var pedidos = $localstorage.getObject('Pedido');

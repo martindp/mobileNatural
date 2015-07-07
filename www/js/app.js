@@ -6,6 +6,7 @@
 // 'starter.controllers' is found in app-controller.js
 var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource', 'ui.bootstrap'])
 
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -44,6 +45,16 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
           'menuContent': {
             templateUrl: "templates/bienvenida.html"
             //controller: 'BienvenidaCtrl'
+          }
+        }
+      })
+
+      .state('app.login', {
+        url: "/login",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/login.html",
+            controller: 'loginController'
           }
         }
       })
@@ -154,3 +165,6 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/app/categorias');
     });
+
+//apiUrl = 'http://quieronaturalmobile.azurewebsites.net';
+apiUrl = 'http://localhost:60000'
