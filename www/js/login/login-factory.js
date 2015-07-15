@@ -1,5 +1,5 @@
 appModule
-    .factory('authService', ['$http', '$q', '$localstorage', function ($http, $q, $localstorage) {
+    .factory('authService', ['$http', '$q', '$localstorage','$rootScope', function ($http, $q, $localstorage,$rootScope) {
 
     var serviceBase = apiUrl+'/';
     var authServiceFactory = {};
@@ -20,15 +20,14 @@ appModule
     };
 
     var _login = function (loginData) {
-        debugger;
         var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
         var deferred = $q.defer();
 
         $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
-            $localstorage.set('authorizationData', { token: response.access_token, userName: loginData.userName });
-
+            $localstorage.setObject('authorizationData', { token: response.access_token, userName: loginData.userName });
+            $rootScope.currentUser = true;
             _authentication.isAuth = true;
             _authentication.userName = loginData.userName;
 
@@ -45,8 +44,8 @@ appModule
 
     var _logOut = function () {
 
-        $localstorage.set('authorizationData','');
-
+        $localstorage.setObject('authorizationData',null);
+        $rootScope.currentUser = false;
         _authentication.isAuth = false;
         _authentication.userName = "";
 
@@ -54,7 +53,7 @@ appModule
 
     var _fillAuthData = function () {
 
-        var authData = $localstorage.get('authorizationData');
+        var authData = $localstorage.getObject('authorizationData');
         if (authData)
         {
             _authentication.isAuth = true;
@@ -68,6 +67,5 @@ appModule
     authServiceFactory.logOut = _logOut;
     authServiceFactory.fillAuthData = _fillAuthData;
     authServiceFactory.authentication = _authentication;
-
     return authServiceFactory;
 }]);

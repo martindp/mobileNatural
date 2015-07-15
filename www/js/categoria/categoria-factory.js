@@ -1,11 +1,19 @@
 appModule
-    .factory('Categorias', function($resource) {
+    .factory('Categorias', function($http,$q,$localstorage,$resource) {
         return {
             obtenerCategorias: function () {
-                return $resource(apiUrl+'/api/Categorias').query();
+                var authData = $localstorage.getObject('authorizationData');
+                var data = "Bearer "+authData.token;
+                return $resource(apiUrl+'/api/Categorias',null,{ 'query': {method:'GET' ,isArray:true ,headers: { 'Authorization': data } }}).query();
+
             },
-            obtenerCategoriaPorId: function (id) {
-                return $resource(apiUrl+'/api/Categorias/'+id).get();
+            obtenerCategoriaPorId: function (idCategoria) {
+                var authData = $localstorage.getObject('authorizationData');
+                var data = "Bearer "+authData.token;
+                debugger;
+                return $resource(apiUrl+'/api/Categorias',{id:idCategoria},{ 'query': {method:'GET' ,headers: { 'Authorization': data } }}).query();
+
+                //return $resource(apiUrl+'/api/Categorias/'+id).get();
             }
         }
     })
