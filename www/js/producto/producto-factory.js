@@ -1,8 +1,10 @@
 appModule
-    .factory('Productos', function($resource) {
+    .factory('Productos', function($resource,$localstorage) {
         return {
-            obtenerProductoPorId: function (id) {
-                return $resource(apiUrl+'/api/Productos/'+id).get();
+            obtenerProductoPorId: function (idProducto) {
+                var authData = $localstorage.getObject('authorizationData');
+                var data = "Bearer "+authData.token;
+                return $resource(apiUrl+'/api/Productos',{id:idProducto},{ 'query': {method:'GET' ,headers: { 'Authorization': data } }}).query();
             }
         }
     })
