@@ -81,14 +81,14 @@
         </div>
         <div ng-repeat="consulta in productor.Consultas" class="card">
           <div class="item item-divider">
-            {{consulta.Nombre}}&nbsp;
+            {{consulta.Nombre}}&nbsp; - {{consulta.Fecha}}
           </div>
           <div class="item item-text-wrap">
             {{consulta.Descripcion}}
           </div>
           <div ng-show="consulta.Respuesta != null && consulta.Respuesta != ''" class="card">
             <div class="item item-divider">
-              {{consulta.Productor}}
+              {{consulta.Productor}}  - {{consulta.Fecha}}
             </div>
             <div class="item item-text-wrap">
               {{consulta.Respuesta}}

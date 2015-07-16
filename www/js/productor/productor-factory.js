@@ -12,9 +12,9 @@ appModule
               return $resource(apiUrl+'/api/Productores',{id:idProductor},{ 'query': {method:'GET' ,headers: { 'Authorization': data } }}).query();
           },
 
-          guardarConsulta: function (descripcion) {
+         /* guardarConsulta: function (descripcion) {
               return $resource(apiUrl+'/api/ConsultasProductor/PostConsultas').save(descripcion);
-          }
+          }*/
 
       }
     })
