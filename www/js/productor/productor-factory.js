@@ -1,11 +1,15 @@
 appModule
-    .factory('Productores', function($resource) {
+    .factory('Productores', function($resource,$localstorage) {
       return {
           obtenerProductores: function(){
-              return $resource(apiUrl+'/api/Productores').query();
+              var authData = $localstorage.getObject('authorizationData');
+              var data = "Bearer "+authData.token;
+              return $resource(apiUrl+'/api/Productores',null,{ 'query': {method:'GET' ,isArray:true,headers: { 'Authorization': data } }}).query();
           },
-          obtenerProductorPorId: function(id){
-              return $resource(apiUrl+'/api/Productores/'+id).get();
+          obtenerProductorPorId: function(idProductor){
+              var authData = $localstorage.getObject('authorizationData');
+              var data = "Bearer "+authData.token;
+              return $resource(apiUrl+'/api/Productores',{id:idProductor},{ 'query': {method:'GET' ,headers: { 'Authorization': data } }}).query();
           },
 
           guardarConsulta: function (descripcion) {
