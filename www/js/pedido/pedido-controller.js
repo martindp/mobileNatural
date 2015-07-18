@@ -1,26 +1,40 @@
 appModule
-    .controller('PedidosCtrl', function($scope, Pedidos, $resource, $location) {
+    .controller('PedidosCtrl', function($scope, Pedidos, $resource, $location, $localstorage,$ionicHistory) {
         $scope.pedidos = Pedidos.obtenerPedidos();
 
         $scope.pedidoEntregado = function (index){
-            var pedidoId = $scope.pedidos[index].Id;
-            $resource('http://localhost:51297/api/EditarPedido?pedidoId='+pedidoId).get(function(){
-                $location.path("/categorias");
+            debugger;
+            var id = $scope.pedidos[index].Id;
+            var authData = $localstorage.getObject('authorizationData');
+            var data = "Bearer "+authData.token;
+            $resource(apiUrl+'/api/EditarPedido',{pedidoId:id},{ 'query': {method:'GET' ,headers: { 'Authorization': data } }}).query(function(){
+                $location.path("app/categorias");
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
             });
 
         }
         $scope.repetirPedido = function (index){
-            var pedidoId = $scope.pedidos[index].Id;
-            $resource('http://localhost:51297/api/RepetirPedido?pedidoId='+pedidoId).save(function(){
-                $location.path("/categorias");
+            var authData = $localstorage.getObject('authorizationData');
+            var data = "Bearer "+authData.token;
+            var id = $scope.pedidos[index].Id;
+            $resource(apiUrl+'/api/RepetirPedido',{pedidoId:id},{ 'query': {method:'POST' ,headers: { 'Authorization': data } }}).query(function(){
+                $location.path("app/categorias");
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
             });
         }
     })
     .controller('ComentariosCtrl',function($scope, Pedidos,$location, $resource, $stateParams, $localstorage,$http){
+        var authData = $localstorage.getObject('authorizationData');
+        var data = "Bearer "+authData.token;
         $scope.pedido = Pedidos.obtenerPedidoPorPedidoId($stateParams.pedidoId);
 
         $scope.comentarPedido = function (pedidoId, productoId, descripcionComentario, calificacion) {
-            $http({ method: 'POST', isArray: false, url: 'http://localhost:51297/api/Comentarios/PostComentario', params: { PedidoId: pedidoId, ProductoId:productoId, descripcionComentario: descripcionComentario, calificacion: calificacion } }).then(
+            debugger;
+            $http({ method: 'POST', isArray: false,headers: { 'Authorization': data}, url: 'http://localhost:51297/api/Comentarios/PostComentario', params: { PedidoId: pedidoId, ProductoId:productoId, descripcionComentario: descripcionComentario, calificacion: calificacion } }).then(
                 function () {
                     //$scope.pedidoProducto = { Calificacion: 0 };
                     //$scope.pedidoProducto = { Comentario: '' };
@@ -50,7 +64,6 @@ appModule
         }
 
         $scope.realizarPedido = function (){
-            debugger;
             var authData = $localstorage.getObject('authorizationData');
             var data = "Bearer "+authData.token;
             var pedidosRealizados = $scope.pedidos;
