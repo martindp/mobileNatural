@@ -5,7 +5,6 @@ appModule
                 var authData = $localstorage.getObject('authorizationData');
                 var data = "Bearer "+authData.token;
                 return $resource(apiUrl+'/api/Pedidos/RealizarPedido',{pedidos:pedidosRealizado},{ 'query': {method:'POST' ,headers: { 'Authorization': data } }}).query();
-                //return $resource(apiUrl+'/api/Pedidos/RealizarPedido').save(pedidos);
             },
             obtenerPedidos: function () {
                 var authData = $localstorage.getObject('authorizationData');
@@ -17,8 +16,6 @@ appModule
                 var authData = $localstorage.getObject('authorizationData');
                 var data = "Bearer "+authData.token;
                 return $resource(apiUrl+'/api/Pedidos',{idPedido:id},{ 'query': {method:'GET' ,headers: { 'Authorization': data } }}).query();
-
-                //return $resource(apiUrl+'/api/Comentarios/'+id).get();
             }
 
         }
