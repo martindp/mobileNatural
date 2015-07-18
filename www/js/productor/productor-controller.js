@@ -41,7 +41,7 @@ appModule
             var authData = $localstorage.getObject('authorizationData');
             var user = authData.userName;
             var data = "Bearer "+authData.token;
-            $http({ method: 'POST', isArray: false, url: apiUrl+'/api/ConsultasProductor/PostConsultas', params: { usuario:user ,productorId: productorId, descripcion: descripcion },headers: { 'Authorization': data } }).then(
+            $http({ method: 'POST', isArray: false, url: apiUrl+'/api/ConsultasProductor/PostConsultas', params: { productorId: productorId, descripcion: descripcion },headers: { 'Authorization': data } }).then(
                 function () {
                     $scope.nuevaConsulta = false;
                     $scope.consulta = { Descripcion: '' };
