@@ -6,51 +6,49 @@ appModule
     .controller('CategoriaCtrl', function($scope, Categorias, $resource, $stateParams, $localstorage) {
         $scope.categoria = Categorias.obtenerCategoriaPorId($stateParams.categoriaId);
 
-        $scope.agregarAlCarrito = function(productoId){
-            $resource(apiUrl+'/api/Productos/'+productoId).get(function(response){
-                var producto = response;
-
-                var pedidos = $localstorage.getObject('Pedido');
-                if (pedidos == null || !(pedidos.length > 0))
-                {
-                    pedidos = [
-                        {
-                            productoId: productoId,
-                            cantidadPedido: producto.Cantidad,
-                            imagenProducto: producto.ImagenProducto,
-                            nombre: producto.Nombre,
-                            nombreProductor: producto.NombreProductor,
-                            precio: producto.Precio,
-                            unidad: producto.Unidad,
-                            cantidad: producto.Cantidad
-                        }
-                    ];
-                }
-                else{
-                    var encontrado = false;
-                    for(var i = 0; i < pedidos.length; i++){
-                        if(pedidos[i].productoId == productoId){
-                            encontrado = true;
-                            pedidos[i].cantidadPedido = pedidos[i].cantidadPedido + producto.Cantidad;
-                        }
+        $scope.agregarAlCarrito = function(producto){
+            debugger;
+            var pedidos = $localstorage.getObject('Pedido');
+            if (pedidos == null || !(pedidos.length > 0))
+            {
+                pedidos = [
+                    {
+                        productoId: producto.Id,
+                        cantidadPedido: producto.Cantidad,
+                        imagenProducto: producto.ImagenProducto,
+                        nombre: producto.Nombre,
+                        nombreProductor: producto.NombreProductor,
+                        precio: producto.Precio,
+                        unidad: producto.Unidad,
+                        cantidad: producto.Cantidad
                     }
-                    if(!encontrado){
-                        pedidos.push({
-                            productoId: productoId,
-                            cantidadPedido: producto.Cantidad,
-                            imagenProducto: producto.ImagenProducto,
-                            nombre: producto.Nombre,
-                            nombreProductor: producto.NombreProductor,
-                            precio: producto.Precio,
-                            unidad: producto.Unidad,
-                            cantidad: producto.Cantidad
-                        });
+                ];
+            }
+            else{
+                var encontrado = false;
+                for(var i = 0; i < pedidos.length; i++){
+                    if(pedidos[i].productoId == producto.Id){
+                        encontrado = true;
+                        pedidos[i].cantidadPedido = pedidos[i].cantidadPedido + producto.Cantidad;
                     }
                 }
+                if(!encontrado){
+                    pedidos.push({
+                        productoId: producto.Id,
+                        cantidadPedido: producto.Cantidad,
+                        imagenProducto: producto.ImagenProducto,
+                        nombre: producto.Nombre,
+                        nombreProductor: producto.NombreProductor,
+                        precio: producto.Precio,
+                        unidad: producto.Unidad,
+                        cantidad: producto.Cantidad
+                    });
+                }
+            }
 
-                $localstorage.setObject('Pedido', pedidos);
+            $localstorage.setObject('Pedido', pedidos);
 
-                $("#totalPedidos").html(pedidos.length);
-            });
+            $("#totalPedidos").html(pedidos.length);
+
         }
     })

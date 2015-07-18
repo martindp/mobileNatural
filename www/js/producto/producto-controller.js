@@ -47,16 +47,13 @@ appModule
             $scope.consulta = { Descripcion: '' };
         };
 
-        $scope.agregarAlCarrito = function(productoId){
-            $resource(apiUrl+'/api/Productos/'+productoId).get(function(response){
-                var producto = response;
-
+        $scope.agregarAlCarrito = function(producto){
                 var pedidos = $localstorage.getObject('Pedido');
                 if (pedidos == null || !(pedidos.length > 0))
                 {
                     pedidos = [
                         {
-                            productoId: productoId,
+                            productoId: producto.Id,
                             cantidadPedido: producto.Cantidad,
                             imagenProducto: producto.ImagenProducto,
                             nombre: producto.Nombre,
@@ -70,14 +67,14 @@ appModule
                 else{
                     var encontrado = false;
                     for(var i = 0; i < pedidos.length; i++){
-                        if(pedidos[i].productoId == productoId){
+                        if(pedidos[i].productoId == producto.Id){
                             encontrado = true;
                             pedidos[i].cantidadPedido = pedidos[i].cantidadPedido + producto.Cantidad;
                         }
                     }
                     if(!encontrado){
                         pedidos.push({
-                            productoId: productoId,
+                            productoId: producto.Id,
                             cantidadPedido: producto.Cantidad,
                             imagenProducto: producto.ImagenProducto,
                             nombre: producto.Nombre,
@@ -92,6 +89,5 @@ appModule
                 $localstorage.setObject('Pedido', pedidos);
 
                 $("#totalPedidos").html(pedidos.length);
-            });
         }
     });

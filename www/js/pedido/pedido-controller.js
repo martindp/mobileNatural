@@ -30,7 +30,7 @@ appModule
         };
 
         })
-    .controller('PedidoCtrl', function($scope, $location, $resource, $localstorage) {
+    .controller('PedidoCtrl', function($scope, $location, $resource, $localstorage,$http,$ionicHistory) {
         $scope.pedidos = $localstorage.getObject('Pedido');
         $scope.eliminarPedido = function(index){
             $scope.pedidos.splice(index, 1);
@@ -50,9 +50,18 @@ appModule
         }
 
         $scope.realizarPedido = function (){
-            $resource(apiUrl+'/api/Pedidos/RealizarPedido').save($scope.pedidos, function(){
-                $localstorage.setObject('Pedido', []);
-                $location.path("/categorias");
-            });
+            debugger;
+            var authData = $localstorage.getObject('authorizationData');
+            var data = "Bearer "+authData.token;
+            var pedidosRealizados = $scope.pedidos;
+            $http({ method: 'POST', isArray: false,headers: { 'Authorization': data,'contentType': "application/json" }, url: apiUrl+'/api/Pedidos/RealizarPedido', params: { pedidoSimple:JSON.stringify(pedidosRealizados) } }).then(
+                function () {
+                    $localstorage.setObject('Pedido', []);
+                    $("#totalPedidos").html(0);
+                    $location.path("app/categorias");
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true
+                    });
+                });
         }
     })
