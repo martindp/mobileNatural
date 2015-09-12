@@ -1,6 +1,6 @@
 <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
-        <input type="search" placeholder="Buscar">
+        <input type="search" ng-model="filters.Nombre" placeholder="Buscar">
     </label>
     <button class="button button-icon icon ion-search">
     </button>
@@ -10,7 +10,7 @@
   <ion-content class="has-subheader">
 
       <div class="list">
-          <a ng-repeat="categoria in categorias" href="#/app/categorias/{{categoria.Id}}" class="item item-thumbnail-left">
+          <a ng-repeat="categoria in categorias | filter:filters" href="#/app/categorias/{{categoria.Id}}" class="item item-thumbnail-left">
               <img ng-src="{{categoria.ImagenCategoria}}">
               <h2>{{categoria.Nombre}}</h2>
               <h3>{{categoria.Descripcion}}</h3>
