@@ -1,11 +1,18 @@
 <ion-view view-title="Productos">
-  <ion-content>
-    <div class="card">
-      <div class="item item-divider">
+  <div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="search" ng-model="filters.Nombre" placeholder="Buscar">
+    </label>
+    <button class="button button-icon icon ion-search light">
+    </button>
+  </div>
+  <ion-content class="has-subheader">
+
+      <div class="item item-divider item-dark">
         {{categoria.Nombre}}
       </div>
-    </div>
-    <div class="list card" ng-repeat="producto in categoria.Productos">
+
+    <div class="list card" ng-repeat="producto in categoria.Productos | filter:filters">
 
       <a href="#/app/productos/{{producto.Id}}" class="item item-avatar">
         <img src="{{producto.ImagenProducto}}">
