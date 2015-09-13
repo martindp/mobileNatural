@@ -27,7 +27,7 @@ appModule
             });
         }
     })
-    .controller('ComentariosCtrl',function($scope, Pedidos,$location, $resource, $stateParams, $localstorage,$http){
+    .controller('ComentariosCtrl',function($scope, Pedidos,$location, $resource, $stateParams, $localstorage,$http,$ionicPopup){
         var authData = $localstorage.getObject('authorizationData');
         var data = "Bearer "+authData.token;
         $scope.pedido = Pedidos.obtenerPedidoPorPedidoId($stateParams.pedidoId);
@@ -40,12 +40,26 @@ appModule
                     //$scope.pedidoProducto = { Comentario: '' };
                     //Actualizo
                     $scope.pedido = Pedidos.obtenerPedidoPorPedidoId($stateParams.pedidoId);
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Comentraio realizado exitosamente',
+                        template: 'Muchas gracias por tus comentarios',
+                        okType: 'button-balanced'
+
+                    });
+                    alertPopup.then(function(res) {
+
+                    });
                 });
+
         };
 
         })
-    .controller('PedidoCtrl', function($scope, $location, $resource, $localstorage,$http,$ionicHistory) {
+    .controller('PedidoCtrl', function(Pedidos,$scope, $location, $resource, $localstorage,$http,$ionicHistory) {
         $scope.pedidos = $localstorage.getObject('Pedido');
+
+        $scope.peidosPorPorductor = Pedidos.getPedidosPorProductor();
+
         $scope.eliminarPedido = function(index){
             $scope.pedidos.splice(index, 1);
             $localstorage.setObject('Pedido', $scope.pedidos);

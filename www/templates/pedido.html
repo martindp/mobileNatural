@@ -1,43 +1,45 @@
-<ion-view cache-view="false" title='Pedido'>
-  <ion-content>
-      <div class="list card" ng-repeat="pedido in pedidos">
-          <div class="item item-avatar">
-              <img src="{{pedido.imagenProducto}}">
-              <div class="row">
-                  <div class="col col-25">
-                      <h>
-                          ${{pedido.precio}}
-                      </h>
-                      <p style="font-size: 10px">
-                          &nbsp;(x {{pedido.cantidad}}{{pedido.unidad}})
-                      </p>
-                  </div>
-                  <div class="col">
-                      <h2>{{pedido.nombre}}</h2>
-                      <p>
-                          {{pedido.nombreProductor}}
-                      </p>
-                  </div>
-                  <div class="col col-10">
-                      <a ng-click="eliminarPedido($index)" class="button button-icon icon ion-android-cancel"></a>
-                  </div>
-              </div>
-          </div>
-          <div class="item tabs tabs-secondary tabs-icon-left">
-              <a ng-click="eliminarUno(pedido)" class="button button-icon icon ion-android-remove"></a>
-              <h>
-                  &nbsp;{{pedido.cantidadPedido}}
-              </h>
-              <p>
-                  &nbsp;{{pedido.unidad}}&nbsp;
-              </p>
-              <a ng-click="agregarUno(pedido)" class="button button-icon icon ion-android-add"></a>
-              <div style="margin-left:100px">
-                  <strong>${{pedido.precio * (pedido.cantidadPedido / pedido.cantidad)}}</strong>
-              </div>
-          </div>
-      </div>
-      <a ng-show="pedidos.length > 0" ng-click="realizarPedido()" class="button button-block button-calm">Realizar Pedido</a>
-      <a ng-if="pedido.length == 0"> No hay productos en la cesta.</a>
-  </ion-content>
+<ion-view cache-view="false" title='Canasto'>
+    <ion-content>
+        <div ng-if="pedidos.length==0">No tiene productos agregados al canasto</div>
+        <div class="list card" ng-repeat="pedido in pedidos">
+            <div class="item item-avatar">
+                <img src="{{pedido.imagenProducto}}">
+                <div class="row">
+                    <div class="col col-25">
+                        <h>
+                            ${{pedido.precio}}
+                        </h>
+                        <p style="font-size: 10px">
+                            &nbsp;(x {{pedido.cantidad}}{{pedido.unidad}})
+                        </p>
+                    </div>
+                    <div class="col">
+                        <h2>{{pedido.nombre}}</h2>
+                        <p>
+                            {{pedido.nombreProductor}}
+                        </p>
+                    </div>
+                    <div class="col col-10">
+                        <a ng-click="eliminarPedido($index)" class="button button-icon icon ion-android-cancel"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a ng-click="eliminarUno(pedido)" class="button button-icon icon ion-android-remove"></a>
+                <h>
+                    &nbsp;{{pedido.cantidadPedido}}
+                </h>
+                <p>
+                    &nbsp;{{pedido.unidad}}&nbsp;
+                </p>
+                <a ng-click="agregarUno(pedido)" class="button button-icon icon ion-android-add"></a>
+                <div style="margin-left:100px">
+                    <strong>${{pedido.precio * (pedido.cantidadPedido / pedido.cantidad)}}</strong>
+                </div>
+            </div>
+        </div><div>
+        <a ng-show="pedidos.length > 0" href="#/app/completarPedido" class="button button-block button-calm">Realizar Pedido</a>
+        <a ng-if="pedido.length == 0"> No hay productos en la cesta.</a>
+    </div>
+    </ion-content>
 </ion-view>

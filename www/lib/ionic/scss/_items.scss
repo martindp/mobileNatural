@@ -333,7 +333,7 @@ a.item-content {
 
 .item-icon-left {
   padding-left: ceil( ($item-padding * 3) + ($item-padding / 3) );
-
+  background: $item-menu-color;
   .icon {
     left: ceil( ($item-padding / 3) * 2);
   }

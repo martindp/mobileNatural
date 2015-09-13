@@ -1,5 +1,5 @@
 appModule
-    .controller('ProductoCtrl', function($scope, $http, Productos, Consultas, $stateParams, $resource, $localstorage) {
+    .controller('ProductoCtrl', function($scope, $http, Productos, Consultas, $stateParams, $resource, $localstorage,$ionicPopup,$state) {
         $scope.producto = Productos.obtenerProductoPorId($stateParams.productoId);
 
         $scope.descripcion = true;
@@ -48,6 +48,7 @@ appModule
         };
 
         $scope.agregarAlCarrito = function(producto){
+            debugger;
                 var pedidos = $localstorage.getObject('Pedido');
                 if (pedidos == null || !(pedidos.length > 0))
                 {
@@ -89,5 +90,25 @@ appModule
                 $localstorage.setObject('Pedido', pedidos);
 
                 $("#totalPedidos").html(pedidos.length);
+
+            //MUESTRO POPUP
+
+            var confirmPopup = $ionicPopup.confirm({
+                template: 'Se ha agregado ' + producto.Cantidad + ' ' + producto.Unidad + ' de ' + producto.Nombre + ' al canasto',
+                cancelText: 'Seguir comprando',
+                cancelType: 'button-balanced',
+                okText: 'Ir al canasto',
+                okType: 'button-balanced'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    $state.go('app.pedido');
+                } else {
+
+                }
+            });
+
+
+            //FIN POPUP
         }
     });

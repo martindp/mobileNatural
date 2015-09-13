@@ -192,6 +192,18 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
                     requireLogin: true
                 }
             })
+            .state('app.completarPedido', {
+                url: "/completarPedido",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/completarPedido.html",
+                        controller: 'PedidoCtrl'
+                    }
+                },
+                data: {
+                    requireLogin: true
+                }
+            })
             .state('app.comentarios', {
                 url: "/pedidos/:pedidoId",
                 views: {

@@ -3,7 +3,7 @@ appModule
         $scope.productores = Productores.obtenerProductores();
     })
 
-    .controller('ProductorCtrl', function($scope, $http, $stateParams, Productores, Consultas,$resource, $localstorage) {
+    .controller('ProductorCtrl', function($scope, $http, $stateParams, Productores, Consultas,$resource, $localstorage,$ionicPopup,$state) {
         $scope.productor = Productores.obtenerProductorPorId($stateParams.productorId);
 
         $scope.descripcion = true;
@@ -54,6 +54,71 @@ appModule
             $scope.nuevaConsulta = false;
             $scope.consulta = { Descripcion: '' };
         };
+
+        $scope.agregarAlCarrito = function(producto){
+            debugger;
+            var pedidos = $localstorage.getObject('Pedido');
+            if (pedidos == null || !(pedidos.length > 0))
+            {
+                pedidos = [
+                    {
+                        productoId: producto.Id,
+                        cantidadPedido: producto.Cantidad,
+                        imagenProducto: producto.ImagenProducto,
+                        nombre: producto.Nombre,
+                        nombreProductor: producto.NombreProductor,
+                        precio: producto.Precio,
+                        unidad: producto.Unidad,
+                        cantidad: producto.Cantidad
+                    }
+                ];
+            }
+            else{
+                var encontrado = false;
+                for(var i = 0; i < pedidos.length; i++){
+                    if(pedidos[i].productoId == producto.Id){
+                        encontrado = true;
+                        pedidos[i].cantidadPedido = pedidos[i].cantidadPedido + producto.Cantidad;
+                    }
+                }
+                if(!encontrado){
+                    pedidos.push({
+                        productoId: producto.Id,
+                        cantidadPedido: producto.Cantidad,
+                        imagenProducto: producto.ImagenProducto,
+                        nombre: producto.Nombre,
+                        nombreProductor: producto.NombreProductor,
+                        precio: producto.Precio,
+                        unidad: producto.Unidad,
+                        cantidad: producto.Cantidad
+                    });
+                }
+            }
+
+            $localstorage.setObject('Pedido', pedidos);
+
+            $("#totalPedidos").html(pedidos.length);
+
+            //MUESTRO POPUP
+
+            var confirmPopup = $ionicPopup.confirm({
+                template: 'Se ha agregado ' + producto.Cantidad + ' ' + producto.Unidad + ' de ' + producto.Nombre + ' al canasto',
+                cancelText: 'Seguir comprando',
+                cancelType: 'button-balanced',
+                okText: 'Ir al canasto',
+                okType: 'button-balanced'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    $state.go('app.pedido');
+                } else {
+
+                }
+            });
+
+
+            //FIN POPUP
+        }
     })
 
 

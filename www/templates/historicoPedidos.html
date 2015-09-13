@@ -1,6 +1,7 @@
 <ion-view cache-view="false" title='<img align="left" class="title-image" src="img/Manzana38px.png" />'>
     <ion-content>
-        <div class="item item-divider">
+        <div ng-if="pedidos.length==0">No tiene pedidos realizados</div>
+        <div class="item item-divider item-dark">
             Mis pedidos realizados
         </div>
         <div class="list card" ng-repeat="pedido in pedidos">

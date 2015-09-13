@@ -3,7 +3,7 @@ appModule
         $scope.categorias = Categorias.obtenerCategorias();
     })
 
-    .controller('CategoriaCtrl', function($scope, Categorias, $resource, $stateParams, $localstorage) {
+    .controller('CategoriaCtrl', function($scope, Categorias, $resource, $stateParams, $localstorage, $ionicPopup,$state) {
         $scope.categoria = Categorias.obtenerCategoriaPorId($stateParams.categoriaId);
 
         $scope.agregarAlCarrito = function(producto){
@@ -49,6 +49,27 @@ appModule
             $localstorage.setObject('Pedido', pedidos);
 
             $("#totalPedidos").html(pedidos.length);
+
+            //MUESTRO POPUP
+
+                var confirmPopup = $ionicPopup.confirm({
+                    //title: 'Consume Ice Cream',
+                    template: 'Se ha agregado ' + producto.Cantidad + ' ' + producto.Unidad + ' de ' + producto.Nombre + ' al canasto',
+                    cancelText: 'Seguir comprando',
+                    cancelType: 'button-balanced',
+                    okText: 'Ir al canasto',
+                    okType: 'button-balanced'
+                });
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        $state.go('app.pedido');
+                    } else {
+
+                    }
+                });
+
+
+            //FIN POPUP
 
         }
     })

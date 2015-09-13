@@ -1,0 +1,42 @@
+<ion-view cache-view="false" title='<img align="left" class="title-image" src="img/Manzana38px.png" />'>
+    <ion-content>
+        
+        <div class="item item-divider item-dark">
+            Detalles del pedido
+        </div>
+        <label class="item item-input">
+            <span class="input-label">Direcci&#243n</span>
+            <input type="text" autofocus>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Tel&#233fono</span>
+            <input type="text">
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">
+                M&#233todo de env&#237o
+            </div>
+            <select>
+                <option selected>Env&#237o a domicilio</option>
+                <option>Encomienda</option>
+                <option>Retiro en local</option>
+            </select>
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">
+                M&#233todo de pago
+            </div>
+            <select>
+                <option selected>Efectivo</option>
+                <option>Giro por Abitab</option>
+            </select>
+        </label>
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Otros detalles para el productor</span>
+            <input type="text">
+        </label>
+        <div>
+            <a ng-show="pedidos.length > 0" ng-click="realizarPedido(pedidos)" class="button button-block button-calm">Completar pedido</a>
+        </div>
+    </ion-content>
+</ion-view>

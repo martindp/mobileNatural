@@ -1,13 +1,11 @@
 <ion-view view-title="Producto">
   <ion-content>
-    <div class="card">
-      <div class="item item-divider">
+      <div class="item item-divider item-dark">
         {{producto.Nombre}}
       </div>
-    </div>
     <div class="container row">
       <div class="col">
-        <img class="full-image" src="{{producto.ImagenProducto}}">
+        <img class="full-image padding" src="{{producto.ImagenProducto}}">
       </div>
       <div class="col">
         <p><rating ng-model="producto.Calificacion" max="5" readonly="true"></rating></p>
