@@ -233,5 +233,5 @@ var appModule = angular.module('starter', ['ionic', 'ionic.utils', 'ngResource',
         $urlRouterProvider.otherwise('/app/bienvenida');
     });
 
-//apiUrl = 'http://quieronaturalmobile.azurewebsites.net';
-apiUrl = 'http://localhost:60000'
+apiUrl = 'http://quieronaturalmobile.azurewebsites.net';
+//apiUrl = 'http://localhost:60000'
