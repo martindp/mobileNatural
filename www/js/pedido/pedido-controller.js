@@ -34,7 +34,7 @@ appModule
 
         $scope.comentarPedido = function (pedidoId, productoId, descripcionComentario, calificacion) {
             debugger;
-            $http({ method: 'POST', isArray: false,headers: { 'Authorization': data}, url: 'http://localhost:51297/api/Comentarios/PostComentario', params: { PedidoId: pedidoId, ProductoId:productoId, descripcionComentario: descripcionComentario, calificacion: calificacion } }).then(
+            $http({ method: 'POST', isArray: false,headers: { 'Authorization': data}, url: apiUrl+'/api/Comentarios/PostComentario', params: { PedidoId: pedidoId, ProductoId:productoId, descripcionComentario: descripcionComentario, calificacion: calificacion } }).then(
                 function () {
                     //$scope.pedidoProducto = { Calificacion: 0 };
                     //$scope.pedidoProducto = { Comentario: '' };
@@ -42,13 +42,13 @@ appModule
                     $scope.pedido = Pedidos.obtenerPedidoPorPedidoId($stateParams.pedidoId);
 
                     var alertPopup = $ionicPopup.alert({
-                        title: 'Comentraio realizado exitosamente',
+                        title: 'Comentario realizado exitosamente',
                         template: 'Muchas gracias por tus comentarios',
                         okType: 'button-balanced'
 
                     });
                     alertPopup.then(function(res) {
-
+                        $location.path("app/pedidos");
                     });
                 });
 
